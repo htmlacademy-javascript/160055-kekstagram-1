@@ -1,13 +1,4 @@
-const ID_ITEMS_COUNT = 25;
-
-const AVATAR_COMMENT_ID = [
-  1,
-  2,
-  3,
-  4,
-  5,
-  6
-];
+const ITEMS_COUNT = 25;
 
 const MESSAGES = [
   'Всё отлично!',
@@ -43,23 +34,7 @@ const DESCRIPTIONS = [
   'Фотография города из окна самолета - новые горизонты и возможности, которые ждут меня впереди.',
   'Мой новый автомобиль - символ достижения моих целей и трудолюбия, который стал реальностью благодаря усердной работе.'
 ];
-// id, число — идентификатор опубликованной фотографии. Это число от 1 до 25. Идентификаторы не должны повторяться.
-// url, строка — адрес картинки вида photos/{{i}}.jpg, где {{i}} — это число от 1 до 25. Адреса картинок не должны повторяться.
-// description, строка — описание фотографии. Описание придумайте самостоятельно.
-// likes, число — количество лайков, поставленных фотографии. Случайное число от 15 до 200.
-// comments, массив объектов — список комментариев, оставленных другими пользователями к этой фотографии. Количество комментариев к каждой фотографии вы определяете на своё усмотрение. Все комментарии генерируются случайным образом. Пример описания объекта с комментарием:
-/*{
-  id: 135,
-  avatar: 'img/avatar-6.svg',
-  message: 'В целом всё неплохо. Но не всё.',
-  name: 'Артём',
-}*/
 
-// У каждого комментария есть идентификатор — id — любое число. Идентификаторы не должны повторяться.
-
-// Поле avatar — это строка, значение которой формируется по правилу img/avatar-{{случайное число от 1 до 6}}.svg. Аватарки подготовлены в директории img.
-
-// Имена авторов также должны быть случайными. Набор имён для комментаторов составьте сами. Подставляйте случайное имя в поле name.
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -84,17 +59,14 @@ function createRandomIdFromRangeGenerator (min, max) {
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const randomPostId = createRandomIdFromRangeGenerator (1, 25);
-const randomCommentId = createRandomIdFromRangeGenerator (1, 250);
-const randomPictureId = createRandomIdFromRangeGenerator (1, 25);
-const messageToComment = () => ({
-  message: getRandomArrayElement(MESSAGES)
-});
+const randomPostId = createRandomIdFromRangeGenerator (1, ITEMS_COUNT);
+const randomCommentId = createRandomIdFromRangeGenerator (1, 1000);
+const randomPictureId = createRandomIdFromRangeGenerator (1, ITEMS_COUNT);
 
 const createItemComment = () => ({
   id: randomCommentId(),
-  avatar: `img/avatar-${getRandomArrayElement(AVATAR_COMMENT_ID)}.svg`,
-  message: Array.from({length: getRandomInteger(1, 2)}, messageToComment),
+  avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+  message: getRandomArrayElement(MESSAGES),
   name: getRandomArrayElement(NAMES),
 });
 
@@ -106,6 +78,6 @@ const createPostItems = () => ({
   comments: Array.from({length: getRandomInteger(5, 15)}, createItemComment),
 });
 
-const postItems = Array.from({length: ID_ITEMS_COUNT}, createPostItems);
+const postItems = Array.from({length: ITEMS_COUNT}, createPostItems);
 
-console.log(postItems);
+console.log(postItems); // eslint-disable-line

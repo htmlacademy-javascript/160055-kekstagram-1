@@ -1,9 +1,11 @@
-import {getRandomInteger} from './util-random.js';
-import {ITEMS_COUNT} from './data.js';
+const getRandomInteger = (a, b) => {
+  const lower = Math.ceil(Math.min(a, b));
+  const upper = Math.floor(Math.max(a, b));
+  const result = Math.random() * (upper - lower + 1) + lower;
+  return Math.floor(result);
+};
 
-const randomPostId = createRandomIdFromRangeGenerator (1, ITEMS_COUNT);
-const randomCommentId = createRandomIdFromRangeGenerator (1, 1000);
-const randomPictureId = createRandomIdFromRangeGenerator (1, ITEMS_COUNT);
+const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 function createRandomIdFromRangeGenerator (min, max) {
   const previousValues = [];
@@ -20,4 +22,4 @@ function createRandomIdFromRangeGenerator (min, max) {
     return currentValue;
   };
 }
-export {randomPostId, randomCommentId, randomPictureId};
+export {getRandomInteger, getRandomArrayElement, createRandomIdFromRangeGenerator};

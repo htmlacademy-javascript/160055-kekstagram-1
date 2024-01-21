@@ -1,4 +1,2 @@
-import './data-generator.js';
-import './data.js';
-import './util-random.js';
-import './util-sort.js';
+import {postItems} from './data-posts-generator.js';
+console.log(postItems); // eslint-disable-line

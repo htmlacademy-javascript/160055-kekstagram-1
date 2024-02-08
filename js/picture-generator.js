@@ -1,20 +1,17 @@
-import {postItems} from './data-posts-generator.js';
+const picturesRoot = document.querySelector('.pictures');
+const pictureTemplate = document.querySelector('#picture').content;
 
-const similarListElement = document.querySelector('.pictures');
-const similarPictureTemplate = document.querySelector('#picture').content;
+const fragment = document.createDocumentFragment();
 
-const similarListFragment = document.createDocumentFragment();
+const addPictures = (data) => {
+  data.forEach(({url, likes, comments}) => {
+    const pictureElement = pictureTemplate.cloneNode(true);
+    pictureElement.querySelector('.picture__img').src = url;
+    pictureElement.querySelector('.picture__likes').textContent = likes;
+    pictureElement.querySelector('.picture__comments').textContent = comments.length;
+    fragment.appendChild(pictureElement);
+  });
+  picturesRoot.appendChild(fragment);
+};
 
-const similarPictures = postItems();
-
-similarPictures.forEach(({url, likes, comments}) => {
-  const pictureElement = similarPictureTemplate.cloneNode(true);
-  pictureElement.querySelector('.picture__img').src = url;
-  pictureElement.querySelector('.picture__likes').textContent = likes;
-  pictureElement.querySelector('.picture__comments').textContent = comments.length;
-  similarListElement.appendChild(pictureElement);
-});
-
-similarListElement.appendChild(similarListFragment);
-
-export {similarListFragment};
+export {addPictures};

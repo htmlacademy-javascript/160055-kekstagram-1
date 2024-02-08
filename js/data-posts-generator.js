@@ -21,6 +21,6 @@ const createPostItems = () => ({
   comments: Array.from({length: getRandomInteger(5, 15)}, createItemComment),
 });
 
-const postItems = Array.from({length: dataPosts.ITEMS_COUNT}, createPostItems);
+const postItems = () => Array.from({length: dataPosts.ITEMS_COUNT}, createPostItems);
 
 export {postItems};

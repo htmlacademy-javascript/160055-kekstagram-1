@@ -1,5 +1,5 @@
 import {postItems} from './data-posts-generator.js';
-//console.log(postItems); // eslint-disable-line
-const dataPosts = postItems();
 import {addPictures} from './picture-generator.js';
+//import {openPictureModal, closePictureModal} from './popup.js';
+const dataPosts = postItems();
 addPictures(dataPosts);

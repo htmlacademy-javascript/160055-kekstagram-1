@@ -36,8 +36,8 @@ const renderComment = (comment) => {
   commentElementImage.alt = comment.name;
   commentElementImage.width = 25;
   commentElementImage.heigth = 25;
-  commentElementDescription.className = 'social__text"';
-  commentElementDescription.innerHTML = comment.message;
+  commentElementDescription.className = 'social__text';
+  commentElementDescription.textContent = comment.message;
   commentElement.appendChild(commentElementImage);
   commentElement.appendChild(commentElementDescription);
   bigPictureCommentsBlock.appendChild(commentElement);

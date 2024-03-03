@@ -91,14 +91,17 @@ const renderPopup = (picture) => {
 const openPictureModal = (picture) => {
   pictureModal.classList.remove('hidden');
   bodyClassPopup.classList.add('modal-open');
-  if (picture.comments.length > 0) {
+  if (picture.comments.length > 1) {
     comments = [...picture.comments];
+    renderCommentsBlock();
     if (picture.comments.length > 5) {
       registerEventButton();
     }
+  } else {
+    comments = [];
+    renderCommentsBlock();
   }
   renderPopup(picture);
-  renderCommentsBlock();
 
   document.addEventListener('keydown', onDocumentKeydown);
 };

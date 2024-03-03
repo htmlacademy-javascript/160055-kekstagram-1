@@ -18,7 +18,7 @@ const createPostItems = () => ({
   url: `photos/${randomPictureId()}.jpg`,
   description: getRandomArrayElement(dataPosts.DESCRIPTIONS),
   likes: getRandomInteger(15, 200),
-  comments: Array.from({length: getRandomInteger(5, 15)}, createItemComment),
+  comments: Array.from({length: getRandomInteger(0, 30)}, createItemComment),
 });
 
 const postItems = () => Array.from({length: dataPosts.ITEMS_COUNT}, createPostItems);

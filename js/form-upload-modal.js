@@ -1,9 +1,9 @@
 import {isEscapeKey} from './popup.js';
 import {registerPristineValidator} from './form-validator.js';
+import {registerFilters} from './filters.js';
 
 const bodyClassPopup = document.querySelector('body');
 const pictureFilterModal = document.querySelector('.img-upload__overlay');
-// const pictureUploadForm = document.querySelector('.img-upload__wrapper');
 const hashtagInput = document.querySelector('.text__hashtags');
 const descriptionInput = document.querySelector('.text__description');
 const uploadFileButton = document.getElementById('upload-file');
@@ -33,7 +33,9 @@ const openPictureFilterModal = () => {
 
   descriptionInput.addEventListener('focus', focusInput);
   descriptionInput.addEventListener('blur', blurInput);
+
   registerPristineValidator();
+  registerFilters();
   document.addEventListener('keydown', onDocumentKeydown);
 };
 

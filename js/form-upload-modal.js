@@ -8,6 +8,9 @@ const hashtagInput = document.querySelector('.text__hashtags');
 const descriptionInput = document.querySelector('.text__description');
 const uploadFileButton = document.getElementById('upload-file');
 const closeFilterButton = document.getElementById('upload-cancel');
+const sliderElement = document.querySelector('.effect-level__slider');
+
+let uiSlider;
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -34,8 +37,17 @@ const openPictureFilterModal = () => {
   descriptionInput.addEventListener('focus', focusInput);
   descriptionInput.addEventListener('blur', blurInput);
 
+  uiSlider = noUiSlider.create(sliderElement, {
+    range: {
+      min: 0,
+      max: 100,
+    },
+    start: 100,
+    step: 1,
+    connect: 'lower',
+  });
   registerPristineValidator();
-  registerFilters();
+  registerFilters(uiSlider);
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
@@ -55,10 +67,11 @@ function closePictureFilterModal() {
   descriptionInput.removeEventListener('focus', focusInput);
   descriptionInput.removeEventListener('blur', blurInput);
   uploadFileButton.value = '';
+  sliderElement.noUiSlider.destroy();
 }
 
 closeFilterButton.addEventListener('click', () => {
   closePictureFilterModal();
 });
 
-export {registerUploadFileButton};
+export {registerUploadFileButton, uiSlider};

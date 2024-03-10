@@ -27,31 +27,4 @@ const registerPristineValidator = () => {
   });
 };
 
-
-// const scaleElement = document.querySelector('.img-upload__scale');
-// const valueElement = document.querySelector('.scale__control--value');
-
-// valueElement.value = 100;
-
-// noUiSlider.create(scaleElement, {
-//   range: {
-//     min: 25,
-//     max: 100,
-//   },
-//   start: 100,
-//   step: 25,
-//   format: {
-//     to: function (value) {
-//       return value.toFixed(0);
-//     },
-//     from: function (value) {
-//       return parseFloat(value);
-//     },
-//   },
-// });
-
-// scaleElement.noUiSlider.on('update', () => {
-//   valueElement.value = scaleElement.noUiSlider.get();
-// });
-
 export {registerPristineValidator};

@@ -4,6 +4,8 @@ import {registerFilters, onHandlerFilterNone, removeFiltersEvents, removeButtons
 
 const bodyClassPopup = document.querySelector('body');
 const pictureFilterModal = document.querySelector('.img-upload__overlay');
+const pictureForm = document.querySelector('.img-upload__form');
+
 const hashtagInput = document.querySelector('.text__hashtags');
 const descriptionInput = document.querySelector('.text__description');
 const uploadFileButton = document.getElementById('upload-file');
@@ -54,7 +56,7 @@ function closePictureFilterModal() {
   hashtagInput.removeEventListener('blur', blurInput);
   descriptionInput.removeEventListener('focus', focusInput);
   descriptionInput.removeEventListener('blur', blurInput);
-  pictureFilterModal.reset();
+  pictureForm.reset();
   removeButtonsScaleEvents();
   onHandlerFilterNone();
   destroyNoUiSlider();

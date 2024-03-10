@@ -1,6 +1,6 @@
 import {isEscapeKey} from './popup.js';
 import {registerPristineValidator} from './form-validator.js';
-import {registerFilters, removeFiltersEvents, removeButtonsScaleEvents, destroyNoUiSlider} from './filters.js';
+import {registerFilters, onHandlerFilterNone, removeFiltersEvents, removeButtonsScaleEvents, destroyNoUiSlider} from './filters.js';
 
 const bodyClassPopup = document.querySelector('body');
 const pictureFilterModal = document.querySelector('.img-upload__overlay');
@@ -54,8 +54,9 @@ function closePictureFilterModal() {
   hashtagInput.removeEventListener('blur', blurInput);
   descriptionInput.removeEventListener('focus', focusInput);
   descriptionInput.removeEventListener('blur', blurInput);
-  uploadFileButton.value = '';
+  pictureFilterModal.reset();
   removeButtonsScaleEvents();
+  onHandlerFilterNone();
   destroyNoUiSlider();
   removeFiltersEvents();
 }

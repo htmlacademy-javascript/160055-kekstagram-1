@@ -120,6 +120,7 @@ const onHandlerFilterHeat = () => {
 };
 
 const removeFiltersEvents = () => {
+
   filterNone.removeEventListener('click', onHandlerFilterNone);
 
   filterChrome.removeEventListener('click', onHandlerFilterChrome);
@@ -176,4 +177,4 @@ const registerFilters = () => {
   filterHeat.addEventListener('click', onHandlerFilterHeat);
 };
 
-export {registerFilters, removeFiltersEvents, removeButtonsScaleEvents, createNoUiSlider, destroyNoUiSlider};
+export {registerFilters, onHandlerFilterNone, removeFiltersEvents, removeButtonsScaleEvents, createNoUiSlider, destroyNoUiSlider};

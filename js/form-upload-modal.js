@@ -67,4 +67,4 @@ closeFilterButton.addEventListener('click', () => {
   closePictureFilterModal();
 });
 
-export {registerUploadFileButton};
+export {registerUploadFileButton, closePictureFilterModal};

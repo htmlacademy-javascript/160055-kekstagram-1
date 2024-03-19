@@ -6,7 +6,7 @@ const errorContainer = errorTemplate.cloneNode(true);
 
 const closeSuccessContainer = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
-  document.removeEventListener('mouseup', closeSuccessClick);
+  document.removeEventListener('click', closeSuccessClick);
   document.body.removeChild(successContainer);
 };
 
@@ -22,17 +22,17 @@ const showSuccess = () => {
   const successButton = document.querySelector('.success__button');
   successButton.addEventListener('click', closeSuccessContainer);
   document.addEventListener('keydown', onDocumentKeydown);
-  document.addEventListener('mouseup', closeSuccessClick);
+  document.addEventListener('click', closeSuccessClick);
 };
 
 const closeErrorContainer = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
-  document.removeEventListener('mouseup', closeAlertClick);
+  document.removeEventListener('click', closeAlertClick);
   document.body.removeChild(errorContainer);
 };
 
 function closeAlertClick(e) {
-  const container = document.querySelector('.success__inner');
+  const container = document.querySelector('.error__inner');
   if (!container.contains(e.target)) {
     closeErrorContainer();
   }
@@ -42,14 +42,36 @@ const showAlert = () => {
   document.body.append(errorContainer);
   const errorButton = document.querySelector('.error__button');
   errorButton.addEventListener('click', closeErrorContainer);
-  document.addEventListener('mouseup', closeAlertClick);
+  document.addEventListener('click', closeAlertClick);
+  document.addEventListener('keydown', onDocumentKeydown);
+};
+
+const picturesDownloadAlert = () => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = '100';
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = '0';
+  alertContainer.style.top = '0';
+  alertContainer.style.right = '0';
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = '#fd4d4c';
+
+  alertContainer.textContent = 'Ошибка загрузки изображений';
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, 5000);
 };
 
 function onDocumentKeydown(evt) {
-  if (isEscapeKey(evt) && successContainer !== null) {
+  if (isEscapeKey(evt) && document.body.querySelector('.success')) {
     evt.preventDefault();
     closeSuccessContainer();
-  } else if (isEscapeKey(evt) && errorContainer !== null) {
+  } else if (isEscapeKey(evt) && document.body.querySelector('.error')) {
     evt.preventDefault();
     closeErrorContainer();
   }
@@ -80,4 +102,4 @@ function createRandomIdFromRangeGenerator (min, max) {
   };
 }
 
-export {getRandomInteger, getRandomArrayElement, createRandomIdFromRangeGenerator, showSuccess, showAlert};
+export {getRandomInteger, getRandomArrayElement, createRandomIdFromRangeGenerator, showSuccess, showAlert, picturesDownloadAlert};

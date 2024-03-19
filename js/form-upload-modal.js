@@ -1,6 +1,7 @@
 import {isEscapeKey} from './popup.js';
 import {registerPristineValidator} from './form-validator.js';
 import {registerFilters, onHandlerFilterNone, removeFiltersEvents, removeButtonsScaleEvents, destroyNoUiSlider} from './filters.js';
+import {setUploadFormSubmit} from './form-validator.js';
 
 const bodyClassPopup = document.querySelector('body');
 const pictureFilterModal = document.querySelector('.img-upload__overlay');
@@ -12,7 +13,7 @@ const uploadFileButton = document.getElementById('upload-file');
 const closeFilterButton = document.getElementById('upload-cancel');
 
 const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) && !document.body.querySelector('.error')) {
     evt.preventDefault();
     closePictureFilterModal();
   }
@@ -45,6 +46,7 @@ const registerUploadFileButton = () => {
   uploadFileButton.addEventListener('change', () => {
     openPictureFilterModal();
   });
+  setUploadFormSubmit(closePictureFilterModal);
 };
 
 function closePictureFilterModal() {

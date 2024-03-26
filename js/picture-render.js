@@ -1,4 +1,5 @@
 import {openPictureModal} from './popup.js';
+
 const picturesRoot = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
@@ -9,6 +10,13 @@ const createPicture = ({url, likes, comments}) => {
   pictureElement.querySelector('.picture__comments').textContent = comments.length;
   return pictureElement;
 };
+
+const clearPictureContainer = () => {
+  picturesRoot.querySelectorAll('.picture').forEach((item) => {
+    item.remove();
+  });
+};
+
 const addPictures = (pictures) => {
   const fragment = document.createDocumentFragment();
   pictures.forEach((picture) => {
@@ -22,4 +30,4 @@ const addPictures = (pictures) => {
   picturesRoot.appendChild(fragment);
 };
 
-export {addPictures};
+export {addPictures, clearPictureContainer};

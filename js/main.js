@@ -1,13 +1,12 @@
-import {addPictures, addFiltersButtons} from './picture-render.js';
 import {registerUploadFileButton} from './form-upload-modal.js';
-import {picturesDownloadAlert} from './utils.js';
+import {picturesDownloadAlert, debounce} from './utils.js';
 import {getData} from './get-post-api.js';
-
+import {registerFilterEvent} from './filter-sort-picture.js';
+const RENDER_DELAY = 500;
 getData()
   .then((pictures) => {
-    addPictures(pictures);
+    debounce(registerFilterEvent(pictures), RENDER_DELAY,);
   })
-  .then(addFiltersButtons)
   .catch(picturesDownloadAlert);
 
 registerUploadFileButton();

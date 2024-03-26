@@ -1,5 +1,7 @@
 import { addPictures, clearPictureContainer } from './picture-render.js';
-import { getRandomInteger } from './utils.js';
+import { getRandomInteger, debounce } from './utils.js';
+
+const RENDER_DELAY = 500;
 
 const BUTTONS_ID = {
   default: 'filter-default',
@@ -45,7 +47,7 @@ const addFiltersButtons = () => {
 const registerFilterEvent = (pictures) => {
   addPictures(pictures);
   imgSortFilters.querySelectorAll('.img-filters__button').forEach((item) => {
-    item.addEventListener('click', () => {
+    item.addEventListener('click', debounce(() => {
       toggleActiveButton(item);
       clearPictureContainer();
       switch (item.getAttribute('id')) {
@@ -65,7 +67,7 @@ const registerFilterEvent = (pictures) => {
           console.error('Фильтра не существует.');
           break;
       }
-    });
+    }, RENDER_DELAY));
   });
   addFiltersButtons();
 };

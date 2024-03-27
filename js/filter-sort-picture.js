@@ -64,8 +64,7 @@ const registerFilterEvent = (pictures) => {
           break;
 
         default:
-          console.error('Фильтра не существует.');
-          break;
+          throw new Error('Такого фильтра не существует.');
       }
     }, RENDER_DELAY));
   });

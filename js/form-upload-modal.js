@@ -3,6 +3,8 @@ import {registerPristineValidator} from './form-validator.js';
 import {registerFilters, onHandlerFilterNone, removeFiltersEvents, removeButtonsScaleEvents, destroyNoUiSlider} from './filters.js';
 import {setUploadFormSubmit} from './form-validator.js';
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
 const bodyClassPopup = document.querySelector('body');
 const pictureFilterModal = document.querySelector('.img-upload__overlay');
 const pictureForm = document.querySelector('.img-upload__form');
@@ -11,6 +13,7 @@ const hashtagInput = document.querySelector('.text__hashtags');
 const descriptionInput = document.querySelector('.text__description');
 const uploadFileButton = document.getElementById('upload-file');
 const closeFilterButton = document.getElementById('upload-cancel');
+const previewPicture = document.querySelector('.img-upload__preview img');
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt) && !document.body.querySelector('.error')) {
@@ -44,6 +47,13 @@ const openPictureFilterModal = () => {
 
 const registerUploadFileButton = () => {
   uploadFileButton.addEventListener('change', () => {
+    const file = uploadFileButton.files[0];
+    const fileName = file.name.toLowerCase();
+
+    const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+    if (matches) {
+      previewPicture.src = URL.createObjectURL(file);
+    }
     openPictureFilterModal();
   });
   setUploadFormSubmit(closePictureFilterModal);
